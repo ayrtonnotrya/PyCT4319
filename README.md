@@ -1,35 +1,21 @@
 # PyCT4319
 Python program for reading the conductivity sensor 4319 from Aanderaa
 ## Example
-```js
-var html = require('choo/html')
-var devtools = require('choo-devtools')
-var choo = require('choo')
+```
+ct = CT4319()
+ct.start_communication("/dev/ttyUSB0")
+ct.set_outputdir(os.getcwd())
+while True:
+    #coleta por 1 minuto e calcula média
+    ct.do_mean()
+    
+    #imprime resultado
+    print(ct.data_mean)
+    
+    #Exporta os dados para csv
+    ct.to_csv()
+    
+    #40 minutos entre as médias
+    time.sleep(10)
 
-var app = choo()
-app.use(devtools())
-app.use(countStore)
-app.route('/', mainView)
-app.mount('body')
-
-function mainView (state, emit) {
-  return html`
-    <body>
-      <h1>count is ${state.count}</h1>
-      <button onclick=${onclick}>Increment</button>
-    </body>
-  `
-
-  function onclick () {
-    emit('increment', 1)
-  }
-}
-
-function countStore (state, emitter) {
-  state.count = 0
-  emitter.on('increment', function (count) {
-    state.count += count
-    emitter.emit('render')
-  })
-}
 ```
