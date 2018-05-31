@@ -342,7 +342,7 @@ class CT4319():
                                           "Use":"Range setting: -1=Auto range, 0=Low range, 1=High range",
                                           "Access Protection":"High"}}
 
-    def start_comm(self, port, baudrate=9600):
+    def start_comm(self, port, baudrate):
         try:
             self.ser.port = port
             self.ser.baudrate = baudrate
@@ -418,7 +418,7 @@ class CT4319():
         else:
             print("Diretório invalido!")
             
-    def to_csv(self, data_mean = True, data = True):
+    def to_csv(self, data_mean = False, data = False):
         if self.output_dir is not "":
             if data:
                 if self.last_output < self.data["Scan"].iloc[-1]:
@@ -476,7 +476,7 @@ class CT4319():
                                             "Conductance[S]":     float(line_list[8])}
                 self.scan += 1
         
-    def do_mean(self, dt=timedelta(minutes=1)):        
+    def do_mean(self, dt=timedelta(minutes=0)):        
         
         init = self.scan
         

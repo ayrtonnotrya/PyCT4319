@@ -7,18 +7,18 @@ Python program for reading the conductivity sensor 4319 from Aanderaa
 from sensor import CT4319
 
 ct = CT4319()
-ct.start_comm("/dev/ttyUSB0")
-ct.set_outputdir("./data/")
+ct.start_comm(port = "/dev/ttyUSB0", baudrate = 9600)
+ct.set_outputdir(output_dir = "./data/")
 while True:
-    #collection for 1 minute and calculates average
-    ct.do_mean()
+    #read the sensor for 10 minute and calculates average
+    ct.do_mean(dt=timedelta(minutes=10))
     
-    #print result
+    #print the pandas dataframe with the averages
     print(ct.data_mean)
     
     #Export data to csv
-    ct.to_csv()
+    ct.to_csv(data_mean = True)
     
-    #40 minutes between averages
-    time.sleep(40*60)
+    #50 minutes between averages
+    time.sleep(50*60)
 ```
