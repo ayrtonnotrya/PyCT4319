@@ -1,6 +1,8 @@
 # PyCT4319
 Python program for reading the conductivity sensor 4319 from Aanderaa
 
+![alt tag](CT4319.png?raw=true)
+
 ## Example
 
 ```
