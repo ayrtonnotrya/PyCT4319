@@ -342,19 +342,19 @@ class CT4319():
                                           "Use":"Range setting: -1=Auto range, 0=Low range, 1=High range",
                                           "Access Protection":"High"}}
 
-    def start_communication(self, port, baudrate=9600):
+    def start_comm(self, port, baudrate=9600):
         try:
             self.ser.port = port
             self.ser.baudrate = baudrate
             self.ser.open()
             self.t.start()
         except SerialException:
-            print("Erro ao comunicar-se com o equipamento!")
-            print("Verifique se a porta e o baudrate estão corretos!")
-            print("Porta = " + port)
+            print("Error communicating with the device!")
+            print("Make sure the device and baudrate are correct!")
+            print("Device = " + port)
             print("Baudrate = " + str(baudrate))
 
-    def close_communication(self):
+    def close_comm(self):
         self.t_stop.set()
         self.ser.close()
 
