@@ -1,6 +1,6 @@
 # PyCT4319
 
-Python program for reading the conductivity sensor 4319 from Aanderaa
+Python program for reading the conductivity sensor 4319 from Aanderaa. This program was written to integrate the CT4319 with an embedded computing module.
 
 <img src="CT4319.png" width="225" height="330">
 
