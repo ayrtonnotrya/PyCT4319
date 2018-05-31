@@ -7,7 +7,7 @@ Python program for reading the conductivity sensor 4319 from Aanderaa
 from sensor import CT4319
 
 ct = CT4319()
-ct.start_communication("/dev/ttyUSB0")
+ct.start_comm("/dev/ttyUSB0")
 ct.set_outputdir("./data/")
 while True:
     #collection for 1 minute and calculates average
