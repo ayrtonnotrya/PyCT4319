@@ -35,11 +35,11 @@ class CT4319():
         self.last_len_mean = 0
         
         self.data = pd.DataFrame(columns = ["Scan", "Time", "Temperature[°C]",  "Condutivity[mS/cm]", 
-                                            "Salinity[PSU]", "Density[kg/m3]", "Sound Speed[m/s]", "Conductance[S]"])
+                                            "Salinity[PSU]", "Density[kg/m3]", "Sound Speed[m/s]", "Conductance[mS]"])
         
         self.data_mean = pd.DataFrame(columns = ["Scans", "Initial Time", "Final Time", "Temperature[°C]",  
                                                  "Condutivity[mS/cm]", "Salinity[PSU]", "Density[kg/m3]", 
-                                                 "Sound Speed[m/s]", "Conductance[S]"])
+                                                 "Sound Speed[m/s]", "Conductance[mS]"])
         
         self.properties = {"Product Name":{"Value":"",
                                            "Last Value Update":"",
@@ -473,7 +473,7 @@ class CT4319():
                                             "Salinity[PSU]":      float(line_list[8]), 
                                             "Density[kg/m3]":     float(line_list[10]), 
                                             "Sound Speed[m/s]":    float(line_list[12]),
-                                            "Conductance[S]":     float(line_list[14])}
+                                            "Conductance[mS]":     float(line_list[14])}
                 self.scan += 1
         
     def do_mean(self, dt=timedelta(minutes=0)):        
@@ -493,4 +493,4 @@ class CT4319():
                                     "Salinity[PSU]":      data["Salinity[PSU]"].mean(), 
                                     "Density[kg/m3]":     data["Density[kg/m3]"].mean(), 
                                     "Sound Speed[m/s]":    data["Soundspeed[m/s]"].mean(), 
-                                    "Conductance[S]":     data["Conductance[S]"].mean()}
+                                    "Conductance[S]":     data["Conductance[mS]"].mean()}
