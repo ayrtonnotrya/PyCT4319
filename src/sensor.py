@@ -473,7 +473,7 @@ class CT4319():
                                             "Salinity[PSU]":      float(line_list[8]), 
                                             "Density[kg/m3]":     float(line_list[10]), 
                                             "Sound Speed[m/s]":    float(line_list[12]),
-                                            "Conductance[S]":     float(line_list[8])}
+                                            "Conductance[S]":     float(line_list[14])}
                 self.scan += 1
         
     def do_mean(self, dt=timedelta(minutes=0)):        
