@@ -10,6 +10,7 @@ from queue import Queue
 from threading import Thread
 from datetime import timedelta
 from datetime import datetime
+import serial.tools.list_ports
 
 class CT4319():
     def __init__(self):
@@ -342,16 +343,16 @@ class CT4319():
                                           "Use":"Range setting: -1=Auto range, 0=Low range, 1=High range",
                                           "Access Protection":"High"}}
 
-    def start_comm(self, port, baudrate):
+    def start_comm(self, port, baudrate=9600):
         try:
             self.ser.port = port
             self.ser.baudrate = baudrate
             self.ser.open()
             self.t.start()
         except SerialException:
-            print("Error communicating with the device!")
-            print("Make sure the device and baudrate are correct!")
-            print("Device = " + port)
+            print("Erro ao comunicar-se com o equipamento!")
+            print("Verifique se a porta e o baudrate estão corretos!")
+            print("Porta = " + port)
             print("Baudrate = " + str(baudrate))
 
     def close_comm(self):
@@ -418,7 +419,7 @@ class CT4319():
         else:
             print("Diretório invalido!")
             
-    def to_csv(self, data_mean = False, data = False):
+    def to_csv(self, data_mean = True, data = True):
         if self.output_dir is not "":
             if data:
                 if self.last_output < self.data["Scan"].iloc[-1]:
@@ -474,10 +475,9 @@ class CT4319():
                                             "Density[kg/m3]":     float(line_list[10]), 
                                             "Sound Speed[m/s]":    float(line_list[12]),
                                             "Conductance[mS]":     float(line_list[14])}
-                                            "Conductance[S]":     float(line_list[14])}
                 self.scan += 1
         
-    def do_mean(self, dt=timedelta(minutes=0)):        
+    def do_mean(self, dt=timedelta(minutes=1)):        
         
         init = self.scan
         
